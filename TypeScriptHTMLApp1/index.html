@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>Weather Services</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		
+		<!-- Required by angular material -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+		
+		<!-- Angular Material Library -->
+		<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+		
+		<!-- Application Code -->
+		<script src="core/app.module.js"></script>
+		<script src="core/constants.js"></script>
+		<script src="weather/weatherController.js"></script>
+		<script src="weather/weather.underground.service.js"></script>
+		<script src="weather/forecast.io.service.js"></script>
+		<script src="core/data.factory.js"></script>
+		<script src="core/utils.js"></script>
+		
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+		
+	</head>
+	<body data-ng-controller="WeatherController as weatherCtlr">
+		<h2 style="padding:5px" >7-Day Forecast for Newark, DE</h2>
+		<div>
+			<div style="width:400px;display:inline-block;float:left;padding-left:5px">
+
+				<md-content>
+				  <md-list class="md-dense" flex>
+					<md-subheader class="md-no-sticky">Weather Underground Forecast</md-subheader>
+					<md-list-item class="md-3-line" data-ng-repeat="day in weatherCtlr.forecastWU | limitTo:7">
+					  <img data-ng-src="{{day.icon}}" class="md-avatar"/>
+					  <div class="md-list-item-text" layout="column">
+						<h3><strong>{{ day.day }}</strong></h3>
+						<h4>high: {{day.high}}</h4>
+						<h4>low: {{day.low}}</h4>
+						<p>{{day.description}}</p>
+					  </div>
+					</md-list-item>
+				  </md-list>
+				</md-content>
+			</div>
+			<div style="width:400px;display:inline-block;padding-left:5px">
+				<md-content>
+				  <md-list class="md-dense" flex>
+					<md-subheader class="md-no-sticky">Forcast.io Forecast</md-subheader>
+					<md-list-item class="md-3-line" data-ng-repeat="day in weatherCtlr.forecastIO | limitTo:7">
+					  <img data-ng-src="{{day.icon}}" class="md-avatar"/>
+					  <div class="md-list-item-text" layout="column">
+						<h3><strong>{{ day.day }}</strong></h3>
+						<h4>high: {{day.high}}</h4>
+						<h4>low: {{day.low}}</h4>
+						<p>{{day.description}}</p>
+					  </div>
+					</md-list-item>
+				  </md-list>
+				</md-content>
+			</div>
+		</div>
+	</body>
+</html>
